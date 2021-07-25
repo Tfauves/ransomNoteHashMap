@@ -16,11 +16,11 @@ public class Main {
     public static void main(String[] args) {
 	List<String> magazine = new ArrayList<>();
 	List<String> note = new ArrayList<>();
-	magazine.add("this is some text.");
-	magazine.add("meet me at midnight.");
-	note.add("this is more text.");
-	note.add("at midnight.");
-	note.add("this is some extra text.");
+	magazine.add("this is text.");
+	//magazine.add("meet me at midnight.");
+	note.add("this is text.");
+	//note.add("at midnight.");
+	//note.add("this is some extra text.");
 
 	checkMagazine(magazine, note);
 
@@ -33,14 +33,22 @@ public class Main {
     	for (int i = 0; i < magazine.size(); i++) {
     		String magText = magazine.get(i);
     		magMap.put(i, magText);
+
+    		for (int j = 0; j < note.size(); j++) {
+    			String noteText = note.get(j);
+    			noteMap.put(j, noteText);
+
+    			if (magMap.equals(noteMap)) {
+    				System.out.println("Yes");
+    			} else {
+    				System.out.println("No");
+				}
+			}
 		}
 			System.out.println(magMap);
 
-    	for (int i = 0; i < note.size(); i++) {
-    		String noteText = note.get(i);
-    		noteMap.put(i, noteText);
-		}
 			System.out.println(noteMap);
+
 
 
 
