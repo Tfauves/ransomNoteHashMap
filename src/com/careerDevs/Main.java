@@ -16,10 +16,12 @@ public class Main {
     public static void main(String[] args) {
 	List<String> magazine = new ArrayList<>();
 	List<String> note = new ArrayList<>();
-	magazine.add("this is text.");
+	magazine.add("give me one grand today night");
 	//magazine.add("meet me at midnight.");
-	note.add("this is text.");
-	//note.add("at midnight.");
+		//magazine.add("two times three is not four");
+	//note.add("give one grand today");
+		//note.add("two times two is four");
+	note.add("at midnight.");
 	//note.add("this is some extra text.");
 
 	checkMagazine(magazine, note);
@@ -28,26 +30,44 @@ public class Main {
 
 
     public static void checkMagazine(List<String> magazine, List<String> note) {
-    	HashMap<Integer, String> magMap = new HashMap<>();
-    	HashMap<Integer, String> noteMap = new HashMap<>();
-    	for (int i = 0; i < magazine.size(); i++) {
-    		String magText = magazine.get(i);
-    		magMap.put(i, magText);
+    	HashMap<String, Integer> magMap = new HashMap<>();
+    	HashMap<String, Integer> noteMap = new HashMap<>();
 
-    		for (int j = 0; j < note.size(); j++) {
-    			String noteText = note.get(j);
-    			noteMap.put(j, noteText);
+    	if (note.size() == 0 || note.size() > magazine.size()) {
+			System.out.println("No");
+		}
+		for (String magWords : magazine) {
+			if (magMap.containsKey(magWords)){
+				magMap.put(magWords, magMap.get(magWords) + 1);
 
-    			if (magMap.equals(noteMap)) {
-    				System.out.println("Yes");
-    			} else {
-    				System.out.println("No");
-				}
+			} else {
+				magMap.put(magWords, 1);
 			}
 		}
-			System.out.println(magMap);
 
-			System.out.println(noteMap);
+		for (String noteWords : note) {
+			if (noteMap.containsKey(noteWords)) {
+				noteMap.put(noteWords, noteMap.get(noteWords) + 1);
+
+			}else {
+				noteMap.put(noteWords, 1);
+			}
+
+		}
+
+		for (String key : magMap.keySet()) {
+
+			if (noteMap.containsKey(key)) {
+				System.out.println("Yes");
+				break;
+			} else  {
+				System.out.println("No");
+				break;
+			}
+		}
+//			System.out.println(magMap);
+//
+//			System.out.println(noteMap);
 
 
 
