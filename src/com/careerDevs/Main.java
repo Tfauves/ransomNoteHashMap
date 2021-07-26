@@ -19,9 +19,9 @@ public class Main {
 	magazine.add("give me one grand today night");
 	//magazine.add("meet me at midnight.");
 		//magazine.add("two times three is not four");
-	//note.add("give one grand today");
+	note.add("give one grand today");
 		//note.add("two times two is four");
-	note.add("at midnight.");
+	//note.add("at midnight.");
 	//note.add("this is some extra text.");
 
 	checkMagazine(magazine, note);
@@ -30,48 +30,50 @@ public class Main {
 
 
     public static void checkMagazine(List<String> magazine, List<String> note) {
-    	HashMap<String, Integer> magMap = new HashMap<>();
-    	HashMap<String, Integer> noteMap = new HashMap<>();
+		HashMap<String, Integer> wordMap = new HashMap<>();
 
-    	if (note.size() == 0 || note.size() > magazine.size()) {
-			System.out.println("No");
-		}
-		for (String magWords : magazine) {
-			if (magMap.containsKey(magWords)){
-				magMap.put(magWords, magMap.get(magWords) + 1);
-
+		for (String words : magazine) {
+			if (wordMap.containsKey(words)) {
+				//if wordMap contains any of the words that are keys within the mag text.
+				//if the word from magazine is in the wordMap count will increment and will be the value to the Key which is words.
+				int count = wordMap.get(words);
+				count++;
+				wordMap.put(words, count);
 			} else {
-				magMap.put(magWords, 1);
+				//if the words from magazine are not in the map then they will be added and assigned the value of one.
+				wordMap.put(words, 1);
 			}
 		}
 
-		for (String noteWords : note) {
-			if (noteMap.containsKey(noteWords)) {
-				noteMap.put(noteWords, noteMap.get(noteWords) + 1);
-
-			}else {
-				noteMap.put(noteWords, 1);
+		for (String words : note) {
+			//Iterating through the note words.
+			if (wordMap.containsKey(words)) {
+				int count = wordMap.get(words);
+				//if the count of the word from note is less than zero then the word is not present or it is not availble the amount of time we need so the text can not be used.
+				if (count <= 0) {
+					System.out.println("No");
+					return;
+				}
+				//otherwise it must exist in map so we can use that word and decrement the count.
+				count--;
+				wordMap.put(words, count);
 			}
-
-		}
-
-		for (String key : magMap.keySet()) {
-
-			if (noteMap.containsKey(key)) {
-				System.out.println("Yes");
-				break;
-			} else  {
+			//if the magwords do not contain the words from note it fails.
+			else if (!wordMap.containsKey(words)) {
 				System.out.println("No");
-				break;
+				return;
 			}
 		}
-//			System.out.println(magMap);
-//
-//			System.out.println(noteMap);
+		System.out.println("Yes");
 
 
+	}
 
-
-
-    }
 }
+
+
+
+
+
+
+
